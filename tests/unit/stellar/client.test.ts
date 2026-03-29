@@ -76,13 +76,13 @@ describe('Stellar Client', () => {
   // ── getAgentKeypair ───────────────────────────────────────────────────────
 
   describe('getAgentKeypair()', () => {
-    it('returns a keypair when STELLAR_AGENT_SECRET is configured', () => {
-      process.env.STELLAR_AGENT_SECRET = 'SMOCK_SECRET_KEY_FOR_TESTS_ONLY';
+    it('returns a keypair when STELLAR_AGENT_SECRET_KEY is configured', () => {
+      process.env.STELLAR_AGENT_SECRET_KEY = 'SMOCK_SECRET_KEY_FOR_TESTS_ONLY';
       expect(() => getAgentKeypair()).not.toThrow();
     });
 
     it('the returned keypair exposes publicKey()', () => {
-      process.env.STELLAR_AGENT_SECRET = 'SMOCK_SECRET_KEY_FOR_TESTS_ONLY';
+      process.env.STELLAR_AGENT_SECRET_KEY = 'SMOCK_SECRET_KEY_FOR_TESTS_ONLY';
       const keypair = getAgentKeypair();
       expect(typeof keypair.publicKey()).toBe('string');
     });

@@ -37,9 +37,9 @@ export function getNetworkPassphrase(): string {
  */
 export function getAgentKeypair(): Keypair {
   if (!agentKeypair) {
-    const secret = process.env.STELLAR_AGENT_SECRET;
+    const secret = process.env.STELLAR_AGENT_SECRET_KEY;
     if (!secret) {
-      throw new Error('STELLAR_AGENT_SECRET not configured');
+      throw new Error('STELLAR_AGENT_SECRET_KEY not configured');
     }
     agentKeypair = Keypair.fromSecret(secret);
   }

@@ -305,7 +305,7 @@ MAX_GAS_PERCENT=0.1                  # Max gas as % of amount
 # Stellar Network
 STELLAR_NETWORK=testnet              # testnet | mainnet | futurenet
 STELLAR_RPC_URL=https://soroban-testnet.stellar.org
-STELLAR_AGENT_SECRET=SBXXXXXX        # Agent keypair
+STELLAR_AGENT_SECRET_KEY=SBXXXXXX     # Agent keypair
 VAULT_CONTRACT_ID=CXXXXXX            # Vault smart contract
 USDC_TOKEN_ADDRESS=GXXXXXX           # USDC token address
 
@@ -339,7 +339,7 @@ DATABASE_URL=postgresql://...
 grep "Agent Loop" logs/combined.log
 
 # Verify environment variables
-echo $STELLAR_AGENT_SECRET
+echo $STELLAR_AGENT_SECRET_KEY
 ```
 
 **Protocol scan failing:**
