@@ -26,6 +26,7 @@ jest.mock('@stellar/stellar-sdk', () => ({
   Networks: {
     PUBLIC: 'Public Global Stellar Network ; September 2015',
     TESTNET: 'Test SDF Network ; September 2015',
+    FUTURENET: 'Test SDF Future Network ; October 2022',
   },
   Transaction: jest.fn(),
   TransactionBuilder: jest.fn(),
@@ -38,6 +39,7 @@ import {
   getAgentKeypair,
   submitTransaction,
   waitForConfirmation,
+  resolveNetworkPassphrase,
 } from '../../../src/stellar/client';
 
 describe('Stellar Client', () => {
@@ -70,6 +72,40 @@ describe('Stellar Client', () => {
       const passphrase = getNetworkPassphrase();
       expect(typeof passphrase).toBe('string');
       expect(passphrase.length).toBeGreaterThan(0);
+    });
+  });
+
+  // ── resolveNetworkPassphrase ───────────────────────────────────────────────
+
+  describe('resolveNetworkPassphrase()', () => {
+    it('returns PUBLIC passphrase for mainnet', () => {
+      expect(resolveNetworkPassphrase('mainnet')).toBe(
+        'Public Global Stellar Network ; September 2015',
+      );
+    });
+
+    it('returns TESTNET passphrase for testnet', () => {
+      expect(resolveNetworkPassphrase('testnet')).toBe(
+        'Test SDF Network ; September 2015',
+      );
+    });
+
+    it('returns FUTURENET passphrase for futurenet', () => {
+      expect(resolveNetworkPassphrase('futurenet')).toBe(
+        'Test SDF Future Network ; October 2022',
+      );
+    });
+
+    it('throws for unknown network value', () => {
+      expect(() => resolveNetworkPassphrase('badnet')).toThrow(
+        'Unknown STELLAR_NETWORK: "badnet"',
+      );
+    });
+
+    it('throws for undefined network value', () => {
+      expect(() => resolveNetworkPassphrase(undefined)).toThrow(
+        'Unknown STELLAR_NETWORK',
+      );
     });
   });
 
